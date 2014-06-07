@@ -1,0 +1,281 @@
+/* CSS Document - Author: Shaibal Mandal */
+
+body
+{
+	font-size: 12px;
+	font-family: Verdana, Arial, SunSans-Regular, Sans-Serif;
+		
+}
+
+a 
+{
+	text-decoration:underline;
+	color:000099;
+}
+
+a:visited 
+{
+	text-decoration:underline;
+	color:000099;
+}
+
+a:hover 
+{
+	text-decoration:underline;
+	color:#FFCC00;
+}
+
+#container
+{
+	width: 900px;
+	border: 0;
+}
+
+#topheader
+{
+	background-color: #FFFFFF;
+	height: 100px;
+	background-image: url(Blue%20Oaks%20Website%20Draft/BO%20Web0113%20copy.gif);
+}
+
+#navcontainer
+{
+	background-color: #ccc;
+	width: 900px;
+	height:25px;
+	vertical-align:middle;
+	padding-top:3px;
+}
+
+
+.navitem
+{
+	font-size: 12px;
+	font-weight:bold;
+	color:#000099;
+	background-color: #CCC;
+	padding: 2px;
+	text-align:left;
+	margin-top:0px;
+	margin-left:5px;
+	float:left;
+	padding-right:35px;
+}
+
+
+.navitemlast
+{
+	background-color: #ffff00;
+	padding: 2px;
+	text-decoration:none;
+	font-weight:bold;
+	color:#000099;
+	text-align:center;
+	width: 96px;
+	margin-top:0px;
+	margin-right: 1px;
+	float:left;
+}
+
+
+#navcontainer a 
+{
+	text-decoration:underline;
+	color:#000099;
+}
+
+#navcontainer a:visited
+{
+	text-decoration:underline;
+	color:#000099;
+}
+
+#navcontainer a:hover
+{	
+	color:#FFCC00;
+	text-decoration: underline;
+}
+
+
+
+
+#main 
+{
+	color:#515160;
+	padding:5px;
+	width: 870px;
+	line-height: 1.6em;
+	text-align: left;
+	padding-left: 5px;
+	
+}
+
+#main a 
+{
+	text-decoration:underline;
+	color:#000099;
+}
+
+#main a:visited
+{
+	text-decoration:underline;
+	color:#000099;
+}
+
+
+#main a:hover
+{	
+	color:#FFCC00;
+	text-decoration: underline;
+}
+
+#main h1
+{
+	font-size:20px;
+	font-weight:bold;
+	padding-top: 15px;
+	color: #333399;
+	font-family:Arial, Helvetica, sans-serif;
+}
+
+#main h2
+{
+	font-size:16px;
+	font-weight:bold;
+	padding-top: 15px;
+	color: #333399;
+	font-family:Arial, Helvetica, sans-serif;
+}
+
+#main h3
+{
+	font-size:13px;
+	font-weight:bold;
+	padding-top: 0px;
+	color: #333399;
+	font-family:Arial, Helvetica, sans-serif;
+}
+
+
+
+#sidebar
+{
+	font-size: 11px;
+	font-family: Verdana, Arial, SunSans-Regular, Sans-Serif;
+	width:230px;
+	border-left: solid 1px;
+	float:right;
+	margin-top:0px;
+	margin-right: 15px;
+	margin-left: 15px;
+	margin-bottom: 10px;
+	padding-left: 0px;
+	color: #515160;
+	text-align:left;
+	clear:both;
+}
+
+#sidebar a
+{
+	color:#333399;
+	text-decoration: underline;
+}
+
+#sidebar a:hover
+{
+	color:#FFCC00;
+	text-decoration: underline;
+}
+
+h1
+{
+	font-size:20px;
+	font-weight:bold;
+	padding-top: 15px;
+	color: #333399;
+	font-family:Arial, Helvetica, sans-serif;
+}
+
+h2
+{
+	font-size:16px;
+	font-weight:bold;
+	padding-top: 15px;
+	color: #333399;
+	font-family:Arial, Helvetica, sans-serif;
+}
+
+h3
+{
+	font-size:13px;
+	font-weight:bold;
+	padding-top: 0px;
+	color: #333399;
+	font-family:Arial, Helvetica, sans-serif;
+}
+
+.headertext1
+{
+	font-size:18px;
+	font-weight:bold;
+	color: #333399;
+	font-family:Arial, Helvetica, sans-serif;
+}
+.headertext2
+{
+	font-size:11px;
+	font-weight:bold;
+	font-family:Arial, Helvetica, sans-serif;
+	color:#333399;	
+}
+
+.anchor
+{
+	font-size:10px;
+}
+
+.anchorred
+{
+	color:#FF0000;
+	font-size:10px;
+	font-weight:bold;
+}
+
+.red
+{
+	color:#FF0000;
+	font-size:10px;
+	font-weight:bold;
+}
+
+
+
+.footer
+{
+	font-size:9px;
+}
+
+
+.footer a 
+{
+	text-decoration:underline;
+	color:#000099;
+}
+
+.footer a:visited
+{
+	text-decoration:underline;
+	color:#000099;
+}
+
+.footer a:hover
+{	
+	color:#FFCC00;
+	text-decoration: underline;
+}
+
+
+
+a img {
+	border: 0;
+}
