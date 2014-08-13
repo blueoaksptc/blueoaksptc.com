@@ -1,3 +1,4 @@
 legacy
 *.swp
-
+*.pyc
+node_modules/
