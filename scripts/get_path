@@ -1,0 +1,8 @@
+#!/bin/bash
+
+function get_path
+{
+    echo "$(cd $(dirname $1); pwd)/$(basename $1)"
+}
+
+get_path "$*"
