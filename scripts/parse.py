@@ -15,8 +15,6 @@ def get_script_directory():
     else:
         return os.path.dirname(path)
 
-os.chdir(get_script_directory())
-
 def print_relevant_lines(filename):
     with open(filename) as f:
         lines = f.readlines()
@@ -43,6 +41,7 @@ def print_relevant_lines(filename):
             print line.rstrip()[starting_whitespace:]
 
 def main():
+    os.chdir(get_script_directory())
     print_relevant_lines('tmp/blueoaks.jade')
 
 if __name__ == "__main__":
