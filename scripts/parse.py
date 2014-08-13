@@ -3,11 +3,17 @@
 import os
 import sys
 
+# Returns the number of whitespace characters in the string s
 def get_leading_whitespace(s):
     return len(s) - len(s.lstrip())
 
+# Returns the directory the current script (or interpreter) is running in
 def get_script_directory():
-    return os.path.dirname(os.path.realpath(sys.argv[0]))
+    path = os.path.realpath(sys.argv[0])
+    if os.path.isdir(path):
+        return path
+    else:
+        return os.path.dirname(path)
 
 os.chdir(get_script_directory())
 
