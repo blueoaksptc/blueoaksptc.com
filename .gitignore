@@ -2,3 +2,4 @@ legacy
 *.swp
 *.pyc
 node_modules/
+scripts/lib/
