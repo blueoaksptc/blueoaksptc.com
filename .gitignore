@@ -3,3 +3,4 @@ legacy
 *.pyc
 node_modules/
 scripts/lib/
+scripts/tmp/
