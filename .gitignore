@@ -4,3 +4,4 @@ legacy
 node_modules/
 scripts/lib/
 scripts/tmp/
+.DS_Store
