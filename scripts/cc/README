@@ -1,0 +1,4 @@
+Required modules to 'pip install':
+
+ - requests
+ - pytidylib
