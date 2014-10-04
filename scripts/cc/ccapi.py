@@ -68,16 +68,31 @@ def request(uri, **params):
     time.sleep(.25) # the API only allows 4 requests per second
     return data
 
+
 def request_campaign(id):
     data = request("emailmarketing/campaigns/%s" % id)
     return data
+
 
 def request_campaign_preview(id):
     data = request("emailmarketing/campaigns/%s/preview" % id)
     return data
 
+
+def print_campaign_preview(id):
+    data = request_campaign_preview(id)
+    print json.dumps(data, indent=4)
+
+    from tidylib import tidy_document
+    document, errors = tidy_document(data['preview_email_content'])
+    logging.debug("HTML preview:")
+    logging.debug(document.encode('utf-8'))
+    logging.debug("Text preview")
+    logging.debug(data['preview_text_content'].encode('utf-8'))
+
+
 def main():
-    configure_logging(verbose=True)
+    configure_logging(verbose=False)
 
     data = request("lists")
     #print json.dumps(data, indent=4)
@@ -92,24 +107,26 @@ def main():
                    status='SENT')
     print json.dumps(data, indent=4)
 
-    data = request_campaign(1118693304123)
-    print json.dumps(data, indent=4)
+    campaigns = []
+    for result in data['results']:
+        campaigns.append(result['id'])
 
-    data = request_campaign_preview(1118693304123)
+    #data = request_campaign(1118693304123)
     #print json.dumps(data, indent=4)
 
-    from tidylib import tidy_document
-    document, errors = tidy_document(data['preview_email_content'])
-    print "HTML preview:"
-    print document
-    print ""
-    print "Text preview"
-    print data['preview_text_content']
+    for campaign in campaigns:
+        data = request_campaign(campaign)
+        for contact_list in data['sent_to_contact_lists']:
+            if g_relevant_list_id == contact_list['id']:
+                print "Campaign[{cid}]: {subject}".format(cid=data['id'], subject=data['subject'])
+                print "Permalink URL: {url}".format(url=data['permalink_url'])
+                for link in data['click_through_details']:
+                    print "  Link[{id}] count={count} {url}".format(id=link['url_uid'], count=link['click_count'], url=link['url'])
+                #print json.dumps(data, indent=4)
+                print ""
 
+    #print_campaign_preview(1118693304123)
 
-    #document, errors = tidy_document(html)
-    #print document
-    #print errors
 
 
 if __name__ == '__main__':
