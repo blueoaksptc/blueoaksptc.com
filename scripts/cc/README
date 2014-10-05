@@ -2,3 +2,20 @@ Required modules to 'pip install':
 
  - requests
  - pytidylib
+
+For these scripts to work, you must create a ~/.ccapi configuration
+file in the following format:
+
+{
+    "api_key": "constantContactApiKey",
+    "bearer_auth": "constantContactBearerAuthentication",
+    "imap_username": "imapUsername",
+    "imap_password": "imapPassword",
+    "imap_host": "mail.example.com"
+}
+
+The IMAP server must support IMAP over SSL.
+
+The script will scan the INBOX on the specified IMAP account for new messages
+from Constant Contact, which can then be correlated to campaigns within the
+Constant Contact REST API.
