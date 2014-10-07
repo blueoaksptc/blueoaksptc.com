@@ -8,6 +8,7 @@ import json
 import logging
 import time
 
+cache_file = os.path.expanduser("~/.cc-cache")
 
 config_file = open(os.path.expanduser('~/.ccapi'))
 config_data = json.load(config_file)
@@ -21,6 +22,38 @@ g_constant_contact_api = 'https://api.constantcontact.com%s'
 
 g_relevant_list_name = '14-15 E-mail List'
 g_relevant_list_id = 0
+
+def get_json_cache():
+    cache = None
+
+    if os.path.isfile(cache_file) and os.access(cache_file, os.R_OK):
+        with open(cache_file, "r") as f:
+            cache = json.load(f)
+
+    if cache == None:
+        cache = {}
+
+    if not 'emailmarketing' in cache:
+        cache['emailmarketing'] = {}
+
+    if not 'campaign_index' in cache['emailmarketing']:
+        cache['emailmarketing']['campaign_index'] = {}
+
+    if not 'campaigns' in cache['emailmarketing']:
+        cache['emailmarketing']['campaigns'] = {}
+
+    if not 'lists' in cache:
+        cache['lists'] = {}
+
+    return cache
+
+def save_json_cache(cache):
+    with open(os.path.expanduser("~/.cc-cache"), "w+") as f:
+        json.dump(cache, f, indent=4, sort_keys=True)
+
+def cache_add_campaign_index(cache, data):
+    for campaign in data['results']:
+        cache['emailmarketing']['campaign_index'][campaign['id']] = campaign
 
 def modified_since_this_school_year():
     from datetime import date
@@ -106,6 +139,7 @@ def print_campaign_preview(id):
     logging.debug("Text preview")
     logging.debug(data['preview_text_content'].encode('utf-8'))
 
+
 def print_campaign_links(campaigns, relevant_list_id):
     for campaign in campaigns:
         data = request_campaign(campaign)
@@ -124,6 +158,9 @@ def print_campaign_links(campaigns, relevant_list_id):
 def main():
     configure_logging(verbose=False)
 
+    cache = get_json_cache()
+    save_json_cache(cache)
+
     data = request("/v2/lists")
     #print json.dumps(data, indent=4)
 
@@ -132,21 +169,22 @@ def main():
             g_relevant_list_id = list['id']
             logging.debug("Got e-mail list; name=\"{name}\", id={id} ".format(name=g_relevant_list_name, id=g_relevant_list_id))
 
-    data = request("/v2/emailmarketing/campaigns",
-                   modified_since=modified_since_this_school_year(),
-                   status='SENT')
+    #data = request("/v2/emailmarketing/campaigns",
+    #               modified_since=modified_since_this_school_year(),
+    #               status='SENT')
 
     # Note: this API has bugs; we get an HTTP 400 when trying to get the next page of results
     # data = request("/v2/emailmarketing/campaigns",
     #               status='SENT')
 
     # GIVE ME ALL THE DATA!!!1 ;-)
-    # data = request("/v2/emailmarketing/campaigns")
+    data = request("/v2/emailmarketing/campaigns")
     # print json.dumps(data, indent=4)
 
     campaigns = []
     for result in data['results']:
         campaigns.append(result['id'])
+        cache['emailmarketing']['campaign_index'][result['id']] = result
 
 
     logging.info("Found {num} campaigns".format(num=len(campaigns)))
@@ -155,11 +193,11 @@ def main():
     #data = request_campaign(1118693304123)
     #print json.dumps(data, indent=4)
 
-    print_campaign_links(campaigns, g_relevant_list_id)
+    #print_campaign_links(campaigns, g_relevant_list_id)
 
     #print_campaign_preview(1118693304123)
 
-
+    save_json_cache(cache)
 
 if __name__ == '__main__':
     main()
