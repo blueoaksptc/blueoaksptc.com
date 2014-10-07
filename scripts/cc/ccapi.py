@@ -17,7 +17,7 @@ config_file.close()
 g_client = requests.session()
 g_api_key = config_data['api_key']
 g_bearer_auth = config_data['bearer_auth']
-g_constant_contact_api = 'https://api.constantcontact.com/v2/%s'
+g_constant_contact_api = 'https://api.constantcontact.com%s'
 
 g_relevant_list_name = '14-15 E-mail List'
 g_relevant_list_id = 0
@@ -66,16 +66,32 @@ def request(uri, **params):
     response = g_client.get(campaigns_uri)
     data = response.json()
     time.sleep(.25) # the API only allows 4 requests per second
+
+    if 'results' in data and 'meta' in data and 'pagination' in data['meta'] and 'next_link' in data['meta']['pagination']:
+        next_link = data['meta']['pagination']['next_link']
+
+        logging.info("Found pagination request: {next_link}".format(next_link=next_link))
+        data2 = request(next_link, **params)
+
+        # concatenate results arrays
+        if 'results' in data2:
+            data['results'] = data['results'] + data2['results']
+
+        # prepare for the next iteration of the while loop
+        del data['meta']['pagination']
+        if 'meta' in data2:
+            data['meta']['pagination'] = data2['meta']['pagination']
+
     return data
 
 
 def request_campaign(id):
-    data = request("emailmarketing/campaigns/%s" % id)
+    data = request("/v2/emailmarketing/campaigns/%s" % id)
     return data
 
 
 def request_campaign_preview(id):
-    data = request("emailmarketing/campaigns/%s/preview" % id)
+    data = request("/v2/emailmarketing/campaigns/%s/preview" % id)
     return data
 
 
@@ -90,11 +106,25 @@ def print_campaign_preview(id):
     logging.debug("Text preview")
     logging.debug(data['preview_text_content'].encode('utf-8'))
 
+def print_campaign_links(campaigns, relevant_list_id):
+    for campaign in campaigns:
+        data = request_campaign(campaign)
+        if 'sent_to_contact_lists' not in data:
+            continue
+        for contact_list in data['sent_to_contact_lists']:
+            if relevant_list_id == contact_list['id']:
+                print "Campaign[{cid}]: {subject}".format(cid=data['id'], subject=data['subject'])
+                print "Permalink URL: {url}".format(url=data['permalink_url'])
+                for link in data['click_through_details']:
+                    print "  Link[{id}] count={count} {url}".format(id=link['url_uid'], count=link['click_count'], url=link['url'])
+                #print json.dumps(data, indent=4)
+                print ""
+
 
 def main():
     configure_logging(verbose=False)
 
-    data = request("lists")
+    data = request("/v2/lists")
     #print json.dumps(data, indent=4)
 
     for list in data:
@@ -102,28 +132,30 @@ def main():
             g_relevant_list_id = list['id']
             logging.debug("Got e-mail list; name=\"{name}\", id={id} ".format(name=g_relevant_list_name, id=g_relevant_list_id))
 
-    data = request("emailmarketing/campaigns",
+    data = request("/v2/emailmarketing/campaigns",
                    modified_since=modified_since_this_school_year(),
                    status='SENT')
-    print json.dumps(data, indent=4)
+
+    # Note: this API has bugs; we get an HTTP 400 when trying to get the next page of results
+    # data = request("/v2/emailmarketing/campaigns",
+    #               status='SENT')
+
+    # GIVE ME ALL THE DATA!!!1 ;-)
+    # data = request("/v2/emailmarketing/campaigns")
+    # print json.dumps(data, indent=4)
 
     campaigns = []
     for result in data['results']:
         campaigns.append(result['id'])
 
+
+    logging.info("Found {num} campaigns".format(num=len(campaigns)))
+    logging.debug("Campaigns: {campaigns}".format(campaigns=campaigns))
+
     #data = request_campaign(1118693304123)
     #print json.dumps(data, indent=4)
 
-    for campaign in campaigns:
-        data = request_campaign(campaign)
-        for contact_list in data['sent_to_contact_lists']:
-            if g_relevant_list_id == contact_list['id']:
-                print "Campaign[{cid}]: {subject}".format(cid=data['id'], subject=data['subject'])
-                print "Permalink URL: {url}".format(url=data['permalink_url'])
-                for link in data['click_through_details']:
-                    print "  Link[{id}] count={count} {url}".format(id=link['url_uid'], count=link['click_count'], url=link['url'])
-                #print json.dumps(data, indent=4)
-                print ""
+    print_campaign_links(campaigns, g_relevant_list_id)
 
     #print_campaign_preview(1118693304123)
 
