@@ -154,6 +154,78 @@ def print_campaign_links(campaigns, relevant_list_id):
                 #print json.dumps(data, indent=4)
                 print ""
 
+def update_last_modified(cache):
+    last_modified = '1900-01-01T00:00:00.000Z'
+
+    # Find the most recently modified campaign
+    for campaign in cache['emailmarketing']['campaign_index']:
+        campaign_modified = cache['emailmarketing']['campaign_index'][campaign]['modified_date']
+        if campaign_modified > last_modified:
+            last_modified = campaign_modified
+
+    # Store the last modified date in the cache
+    cache['emailmarketing']['last_modified_campaign'] = last_modified
+    logging.debug("Last modified cached campaign: {last_modified}".format(last_modified=last_modified))
+
+
+def update_last_fetched(cache):
+    last_fetched = '1900-01-01T00:00:00.000Z'
+
+    # Find the most recently fetched campaign
+    for campaign in cache['emailmarketing']['campaigns']:
+        campaign_modified = cache['emailmarketing']['campaigns'][campaign]['modified_date']
+        if last_fetched < campaign_modified:
+            last_fetched = campaign_modified
+
+    # Store the last fetched date in the cache
+    cache['emailmarketing']['last_fetched_campaign'] = last_fetched
+    logging.debug("Last fetched campaign: {last_modified}".format(last_modified=last_fetched))
+
+
+def get_campaign_ids(cache):
+    result = []
+    for campaign in cache['emailmarketing']['campaign_index']:
+        result.append(campaign)
+    return result
+
+
+def update_campaign_index(cache):
+    if 0 == len(cache['emailmarketing']['campaign_index']):
+        # Need to grab all the data
+        data = request("/v2/emailmarketing/campaigns")
+        for result in data['results']:
+            cache['emailmarketing']['campaign_index'][result['id']] = result
+    else:
+        # incremental update
+        if not 'last_modified_campaign' in cache['emailmarketing']:
+            update_last_modified(cache)
+
+        last_modified = cache['emailmarketing']['last_modified_campaign']
+        data = request("/v2/emailmarketing/campaigns",
+                       modified_since=last_modified)
+        for result in data['results']:
+            cache['emailmarketing']['campaign_index'][result['id']] = result
+
+    update_last_modified(cache)
+
+
+def fetch_updated_campaigns(cache):
+    if not 'last_fetched_campaign' in cache['emailmarketing']:
+        update_last_fetched(cache)
+
+    last_fetched = cache['emailmarketing']['last_fetched_campaign']
+    last_fetched_max = last_fetched
+
+    for campaign in cache['emailmarketing']['campaign_index']:
+        index_modified = cache['emailmarketing']['campaign_index'][campaign]['modified_date']
+        if index_modified > last_fetched:
+            data = request_campaign(campaign)
+            cache['emailmarketing']['campaigns'][campaign] = data
+            if index_modified > last_fetched_max:
+                last_fetched_max = index_modified
+
+    cache['emailmarketing']['last_fetched_campaign'] = last_fetched_max
+
 
 def main():
     configure_logging(verbose=False)
@@ -169,32 +241,17 @@ def main():
             g_relevant_list_id = list['id']
             logging.debug("Got e-mail list; name=\"{name}\", id={id} ".format(name=g_relevant_list_name, id=g_relevant_list_id))
 
-    #data = request("/v2/emailmarketing/campaigns",
-    #               modified_since=modified_since_this_school_year(),
-    #               status='SENT')
+    update_campaign_index(cache)
 
-    # Note: this API has bugs; we get an HTTP 400 when trying to get the next page of results
-    # data = request("/v2/emailmarketing/campaigns",
-    #               status='SENT')
-
-    # GIVE ME ALL THE DATA!!!1 ;-)
-    data = request("/v2/emailmarketing/campaigns")
-    # print json.dumps(data, indent=4)
-
-    campaigns = []
-    for result in data['results']:
-        campaigns.append(result['id'])
-        cache['emailmarketing']['campaign_index'][result['id']] = result
-
+    campaigns = get_campaign_ids(cache)
 
     logging.info("Found {num} campaigns".format(num=len(campaigns)))
     logging.debug("Campaigns: {campaigns}".format(campaigns=campaigns))
 
-    #data = request_campaign(1118693304123)
+    fetch_updated_campaigns(cache)
+
     #print json.dumps(data, indent=4)
-
     #print_campaign_links(campaigns, g_relevant_list_id)
-
     #print_campaign_preview(1118693304123)
 
     save_json_cache(cache)
