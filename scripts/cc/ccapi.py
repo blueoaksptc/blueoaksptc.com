@@ -244,6 +244,8 @@ def main():
     update_campaign_index(cache)
 
     campaigns = get_campaign_ids(cache)
+    campaigns = map(int, campaigns)
+    campaigns.sort(reverse=True)
 
     logging.info("Found {num} campaigns".format(num=len(campaigns)))
     logging.debug("Campaigns: {campaigns}".format(campaigns=campaigns))
@@ -253,6 +255,20 @@ def main():
     #print json.dumps(data, indent=4)
     #print_campaign_links(campaigns, g_relevant_list_id)
     #print_campaign_preview(1118693304123)
+    html_links = open("permalinks.html", "w+")
+    html_links.write(
+"""<html>
+<head>
+<title>PTC Permalinks</title>
+</head>
+<body>"""
+)
+    for cid in campaigns:
+        campaign = cache['emailmarketing']['campaigns'][str(cid)]
+        if 'subject' in campaign and 'permalink_url' in campaign:
+            html_links.write('<a href="{permalink}">{subject}</a><br />\n'.format(permalink=campaign['permalink_url'], subject=campaign['subject']))
+    html_links.write('</html>')
+    html_links.close()
 
     save_json_cache(cache)
 
