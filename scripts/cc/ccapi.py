@@ -1,4 +1,4 @@
-#!/usr/local/bin/python
+#!/usr/bin/env python2
 
 import os
 import sys
@@ -256,13 +256,13 @@ def main():
     #print_campaign_links(campaigns, g_relevant_list_id)
     #print_campaign_preview(1118693304123)
     html_links = open("permalinks.html", "w+")
-    html_links.write(
-"""<html>
+    html_links.write("""\
+<html>
 <head>
 <title>PTC Permalinks</title>
 </head>
-<body>"""
-)
+<body>\
+""")
     for cid in campaigns:
         campaign = cache['emailmarketing']['campaigns'][str(cid)]
         if 'subject' in campaign and 'permalink_url' in campaign:
