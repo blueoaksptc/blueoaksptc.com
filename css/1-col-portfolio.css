@@ -12,6 +12,22 @@ footer {
     margin: 50px 0;
 }
 
+.h4, h4 {
+	font-size: 18px;
+}
+
+.bs-callout-info h4 {
+	color: #1b809e;
+}
+
+.bs-callout h4 {
+	margin-top: 0;
+	margin-bottom: 5px;
+}
+
+.bs-callout-info {
+	border-left-color: #1b809e;
+}
 .bs-callout-warning {
     background-color: #faf8f0;
     border-color: #faebcc;
