@@ -12,12 +12,12 @@ with open(sys.argv[1], 'r') as f:
     l = None
 
     for row in reader:
-        if row[2] == 'Y':
-            if row[3] == 'Platinum':
+        if row[2].lower() == 'y':
+            if row[3].lower() == 'platinum':
                 l = platinum
-            elif row[3] == 'Silver':
+            elif row[3].lower() == 'silver':
                 l = silver
-            elif row[3] == 'Donations':
+            elif row[3].lower() == 'donations':
                 l = donations
             l.append('<h4><a href="http://{url}">{text}</a></h4>'.format(url=row[1],text=escape(row[0])))
 
