@@ -1,0 +1,9 @@
+#!/bin/bash
+
+cd $(dirname $0)
+cd ..
+rm -rf min
+mkdir min
+for file in *.html; do
+    htmlmin --remove-comments $file min/$file
+done
