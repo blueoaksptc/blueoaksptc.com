@@ -261,13 +261,15 @@ def main():
 <head>
 <title>PTC Permalinks</title>
 </head>
-<body>\
+<body>
 """)
     for cid in campaigns:
         campaign = cache['emailmarketing']['campaigns'][str(cid)]
         if 'subject' in campaign and 'permalink_url' in campaign:
             html_links.write('<a href="{permalink}">{subject}</a><br />\n'.format(permalink=campaign['permalink_url'], subject=campaign['subject']))
-    html_links.write('</html>')
+    html_links.write("""</body>
+</html>
+""")
     html_links.close()
 
     save_json_cache(cache)
