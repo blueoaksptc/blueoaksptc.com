@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <meta name="robots" content="noindex">
 
     <title>Blue Oaks PTC</title>
 
@@ -14,7 +15,11 @@
     <link href="css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link href="css/1-col-portfolio.css" rel="stylesheet">
+    <link href="css/landing-page.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -31,17 +36,15 @@
   ga('create', 'UA-50829393-1', 'blueoaksptc.com');
   ga('send', 'pageview');
 </script>
+
 </head>
 
-<!-- Note: overriding the padding-top because we removed the nav for now. -->
-<body style="padding-top: 0px">
+<body>
 
     <!-- Navigation -->
-    <!-- Note: the navigation seems redundant on the main page -->
-    <!--
-    <a id="home"></a>
-    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-        <div class="container">
+    <nav class="navbar navbar-default navbar-fixed-top topnav" role="navigation">
+        <div class="container topnav">
+            <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                     <span class="sr-only">Toggle navigation</span>
@@ -49,94 +52,76 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="http://www.blueoaksptc.com/">Blue Oaks PTC</a>
+                <a class="navbar-brand topnav" href="#">Blue Oaks PTC</a>
             </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
+                <ul class="nav navbar-nav navbar-right">
                     <li>
-                        <a href="#home">Home</a>
+                        <a class="page-scroll" href="#news">Newsletters</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#handouts">Handouts</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#organization">Organization</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#school">School Information</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="http://www.blueoaksptc.com/contact.html">Contact Us</a>
                     </li>
                 </ul>
             </div>
+            <!-- /.navbar-collapse -->
         </div>
+        <!-- /.container -->
     </nav>
-    -->
+
+
+    <!-- Header -->
+    <a name="about"></a>
+    <div class="intro-header">
+        <div class="container">
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="intro-message">
+                        <h1>Blue Oaks PTC</h1>
+                        <h2>Working Together for Our Students</h2>
+                        
+                        <!--
+                        <hr class="intro-divider">
+                        <ul class="list-inline intro-social-buttons">
+                            <li>
+                                <a href="https://twitter.com/SBootstrap" class="btn btn-default btn-lg"><i class="fa fa-twitter fa-fw"></i> <span class="network-name">Twitter</span></a>
+                            </li>
+                            <li>
+                                <a href="https://github.com/IronSummitMedia/startbootstrap" class="btn btn-default btn-lg"><i class="fa fa-github fa-fw"></i> <span class="network-name">Github</span></a>
+                            </li>
+                            <li>
+                                <a href="#" class="btn btn-default btn-lg"><i class="fa fa-linkedin fa-fw"></i> <span class="network-name">Linkedin</span></a>
+                            </li>
+                        </ul>
+                        -->
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- /.container -->
+
+    </div>
+    <!-- /.intro-header -->
 
     <!-- Page Content -->
     <div class="container">
-
-        <!-- Page Heading -->
-        <div class="row">
-            <div class="col-lg-12 page-header">
-                <h1><i>Blue Oaks PTC</i></h1>
-                <h4 class="text-muted"><i>&quot;Working Together for Our Students&quot;</i></h4>
-            </div>
-        </div>
-        <!-- /.row -->
-
-
-<!--
-<div class="row">
-            <div class="col-md-12">
-                <div class="alert alert-warning" role="alert">
-                    <strong>Call to action:</strong> Donate now for the 2015 Walk-a-Thon!
-<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top" style="float: right; clear: both;">
-<input type="hidden" name="cmd" value="_s-xclick">
-<input type="hidden" name="hosted_button_id" value="4B2J3S6U4VQVQ">
-<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
-<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
-</form>
-<br />
-<br />
-</div>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-6">
-                <div class="alert alert-warning" role="alert">
-                    <a href="http://myemail.constantcontact.com/Blue-Oaks-6th-Annual-Pancake-Breakfast---Get-Your-Tickets-and-Volunteer.html?soid=1102647741191&aid=gM_rmBLeXHs"><strong>Call to action:</strong> Get your 2015 Pancake Breakfast tickets now!</a>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="alert alert-warning" role="alert">
-<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
-<input type="hidden" name="cmd" value="_s-xclick">
-<input type="hidden" name="hosted_button_id" value="8DJQ62XGVNC6A">
-<table>
-<tr><td><input type="hidden" name="on0" value="Pancake Breakfast Tickets">Pancake Breakfast Tickets</td></tr><tr><td><select name="os0">
-    <option value="Adult admission">Adult admission $6.00 USD</option>
-    <option value="Child admission">Child admission $4.00 USD</option>
-    <option value="Child (2 years old and under)">Child (2 years old and under) $0.00 USD</option>
-    <option value="One (1) Adult + One (1) Child">One (1) Adult + One (1) Child $10.00 USD</option>
-    <option value="One (1) Adult + Two (2) Children">One (1) Adult + Two (2) Children $14.00 USD</option>
-    <option value="Two (2) Adults + One (1) Child">Two (2) Adults + One (1) Child $16.00 USD</option>
-    <option value="Two (2) Adults + Two (2) Children">Two (2) Adults + Two (2) Children $20.00 USD</option>
-    <option value="Two (2) Adults + Three (3) Children">Two (2) Adults + Three (3) Children $24.00 USD</option>
-    <option value="Two (2) Adults + Four (4) Children">Two (2) Adults + Four (4) Children $28.00 USD</option>
-</select> </td></tr>
-</table>
-<input type="hidden" name="currency_code" value="USD">
-<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_buynow_SM.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
-<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
-</form>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
-                <div class="alert alert-warning" role="alert">
-                    <strong>Call to action:</strong> <a href="golf.html">First Annual Golf Tournament! Register now!</a>
-                </div>
-            </div>
-
-        </div>
--->
-
         <div class="row">
 
 
             <div class="col-md-4">
+                <section id="news"></section>
                 <h3>Recent PTC News</h3>
                 <!--
                 <a class="btn btn-primary btn-block" href="">January Nth, 2016<span class="glyphicon glyphicon-chevron-right"></span></a>
@@ -192,12 +177,14 @@
             </div>
 
             <div class="col-md-4">
+                            <section id="handouts"></section>
                 <h3>PTC Handouts</h3>
                 <a class="btn btn-primary btn-block" href="doc/calendar_of_events.pdf">Calendar of Events<span class="glyphicon glyphicon-chevron-right"></span></a>
                 <a class="btn btn-primary btn-block" href="doc/PTC_Membership_Form.pdf">Membership Form<span class="glyphicon glyphicon-chevron-right"></span></a>
                 <a class="btn btn-primary btn-block" href="doc/SpiritwearOrderForm.pdf">Spirit Wear Order Form<span class="glyphicon glyphicon-chevron-right"></span></a>
                 <a class="btn btn-primary btn-block" href="doc/NoHassleFundraisingForm.pdf">No Hassle Fundraising Form<span class="glyphicon glyphicon-chevron-right"></span></a>
 
+                                <section id="organization"></section>
                 <h3>PTC Organization</h3>
                 <a class="btn btn-primary btn-block" href="doc/PTC_Bylaws.pdf">Bylaws<span class="glyphicon glyphicon-chevron-right"></span></a>
                 <a class="btn btn-primary btn-block" href="doc/PTC_Board.pdf">Board<span class="glyphicon glyphicon-chevron-right"></span></a>
@@ -207,6 +194,7 @@
             </div>
 
             <div class="col-md-4">
+                                <section id="school"></section>
                 <h3>School Information</h3>
                 <a class="btn btn-primary btn-block" href="http://www.rcsdk8.org/apps/pages/?uREC_ID=89894&type=d">Blue Oaks Elementary (district page) <span class="glyphicon glyphicon-chevron-right"></span></a>
                 <!--
@@ -216,9 +204,9 @@
                 -->
             </div>
 
-        </div>
+        </div >
 
-        <hr>
+  <hr>
 
         <div class="row">
             <div class="bs-callout bs-callout-warning">
@@ -239,15 +227,40 @@
             </div>
             <!-- /.row -->
         </footer>
-
     </div>
-    <!-- /.container -->
 
-    <!-- jQuery Version 1.11.0 -->
+
+
+
+
+
+    <!-- jQuery -->
     <script src="js/jquery-1.11.0.js"></script>
+    <script src="js/jquery.easing.min.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
+
+    <script>
+$(function() {
+    $('a.page-scroll').bind('click', function(event) {
+        var $anchor = $(this);
+        $('html, body').stop().animate({
+            scrollTop: $($anchor.attr('href')).offset().top -50
+        }, 1500, 'easeInOutExpo');
+
+        if($($anchor).closest('ul').hasClass('dropdown-menu')){
+           $($anchor).closest('ul').parent().siblings().removeClass('active'); 
+           $($anchor).closest('ul').parent().addClass('active'); 
+        }else{
+           $($anchor).parent().siblings().removeClass('active');
+           $($anchor).parent().addClass('active');
+        }
+        event.preventDefault();
+    });
+});
+</script>
+
 
 </body>
 
