@@ -241,4 +241,5 @@ h3 {
 
 .address {
 	text-align: right;
+    text-shadow: 0 0 8px rgba(0,0,0,0.8);
 }
