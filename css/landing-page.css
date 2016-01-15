@@ -48,8 +48,8 @@ h6 {
 
 .intro-message {
     position: relative;
-    padding-top: 20%;
-    padding-bottom: 20%;
+    padding-top: 15%;
+    padding-bottom: 15%;
 }
 
 .intro-message > h1 {
@@ -237,4 +237,8 @@ h3 {
 	padding-top: 1px;
 	background-color: rgba(255,255,255,0.65);
 	box-shadow:2px 2px 3px rgba(0,0,0,0.6);
+}
+
+.address {
+	text-align: right;
 }
