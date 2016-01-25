@@ -188,7 +188,7 @@ footer {
 }
 
 h3 {
-	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.19);
+	text-align: ; 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.19);
 	background-color:#b1c2f7;
 	text-align: center;
 	font-size:1.55em;
@@ -197,6 +197,12 @@ h3 {
 .h4, h4 {
 	font-size: 18px;
 
+}
+
+h6 {
+	text-align: center;
+	font-size:1.55em;
+	padding: 5px;
 }
 
 .bs-callout-info h4 {
@@ -228,7 +234,7 @@ h3 {
 	border:0px;
 }
 
-.intro-message .btn {
+.image-button .btn {
 	color:#414b68;
 	border:0px;
 	padding-bottom:0px;
@@ -242,4 +248,9 @@ h3 {
 .address {
 	text-align: right;
     text-shadow: 0 0 8px rgba(0,0,0,0.8);
+}
+
+.facebook{
+position: absolute;
+top: 100px;
 }
